@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Планировщик задач</title>
+    <link rel="stylesheet" href="style.css">
+    
+        <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110097812', 'ym');
+
+        ym(110097812, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/110097812" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <meta name="description" content="Удобный планировщик задач для ежедневного использования. Добавляй, выполняй и отслеживай свои задачи с помощью TaskFlow.">
+<meta name="keywords" content="планировщик, задачи, to-do, список дел, продуктивность, таймер, достижения">
+<meta property="og:title" content="Планировщик задач TaskFlow">
+<meta property="og:description" content="Управляй задачами, отслеживай продуктивность и получай достижения.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://taskflow.insajdd41.workers.dev/">
+    
+</head>
+<body>
+
+<!-- МЕНЮ -->
+<nav class="fixed-menu">
+    <div class="menu-logo">🌸 Task<span class="green">Flow</span></div>
+    <ul class="menu-links">
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#tasks">Задачи</a></li>
+        <li><a href="#stats">Статистика</a></li>
+        <li><a href="#achievements">Достижения</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+</nav>
+
+<main class="container">
+
+    <!-- HERO -->
+    <section id="home" class="hero-section">
+        <h1 id="easterEggTitle">🎯 Планировщик задач</h1>
+        <p class="subtitle">Организуй свой день</p>
+        <div class="hero-stats">
+            <div class="stat-card pink">✅ Выполнено: <span id="completedCount">0</span></div>
+            <div class="stat-card green">📋 Всего: <span id="totalCount">0</span></div>
+            <div class="stat-card gradient">⏱️ Время: <span id="totalTimeStat">0</span>ч</div>
+        </div>
+    </section>
+
+    <!-- ЗАДАЧИ -->
+    <section id="tasks" class="tasks-section">
+        <h2>📝 Мои задачи</h2>
+        <div class="task-input-group">
+            <input type="text" id="taskInput" placeholder="Что нужно сделать?">
+            <button id="addTaskBtn">➕ Добавить</button>
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="active">Активные</button>
+            <button class="filter-btn" data-filter="completed">Выполненные</button>
+        </div>
+        <ul id="taskList" class="task-list"></ul>
+        <button id="clearCompletedBtn" class="clear-btn">🗑️ Очистить выполненные</button>
+    </section>
+
+    <!-- СТАТИСТИКА -->
+    <section id="stats" class="stats-section">
+        <h2>📊 Статистика</h2>
+        <div class="stats-grid">
+            <div class="stat-item pink-bg">Активных: <span id="activeStat">0</span></div>
+            <div class="stat-item green-bg">Сегодня: <span id="todayStat">0</span></div>
+            <div class="stat-item gradient-bg">Продуктивность: <span id="productivityStat">0</span>%</div>
+            <div class="stat-item time-bg">⏱️ Общее время: <span id="totalTimeStat2">0</span>ч</div>
+            <div class="stat-item avg-bg">Среднее время: <span id="avgTimeStat">0</span>м</div>
+        </div>
+        <!-- Диаграмма -->
+        <div class="chart-section">
+            <h3>📈 Продуктивность за неделю</h3>
+            <div class="chart-container">
+                <div class="chart-bars" id="chartBars"></div>
+                <div class="chart-labels" id="chartLabels"></div>
+            </div>
+        </div>
+        <!-- 3D КУБ -->
+        <div class="cube-3d">
+            <div class="cube">
+                <div class="face front">🏆</div>
+                <div class="face back">⭐</div>
+                <div class="face right">🎯</div>
+                <div class="face left">💪</div>
+                <div class="face top">🚀</div>
+                <div class="face bottom">✅</div>
+            </div>
+            <p class="cube-text">3D кубик</p>
+        </div>
+    </section>
+
+    <!-- ДОСТИЖЕНИЯ -->
+    <section id="achievements" class="achievements-section">
+        <h2>🏅 Мои достижения</h2>
+        <div class="achievements-grid" id="achievementsGrid"></div>
+        <div class="achievement-progress">
+            <p>Прогресс: <span id="achievementTotal">0</span> / <span id="achievementMax">14</span></p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="achievementProgress" style="width: 0%;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СТАТЬЯ ДЛЯ SEO -->
+<section id="about" class="about-section">
+    <h2>📖 Как эффективно планировать свой день</h2>
+    <div class="article-content">
+        <p>Планирование задач — это ключевой навык продуктивного человека. Исследования показывают, что люди, ведущие чек-листы, выполняют на 30% больше дел за день. Наш планировщик помогает структурировать задачи, расставлять приоритеты и отслеживать прогресс.</p>
+        <p>Просто добавляйте задачи, отмечайте выполненные и следите за статистикой. Чем больше задач вы выполняете, тем выше ваша продуктивность. А система достижений и таймер помогают оставаться мотивированным.</p>
+        <p>Совет: разбивайте большие задачи на маленькие шаги — так их проще выполнять, а чувство прогресса мотивирует двигаться дальше. Используйте наш планировщик каждый день, чтобы выработать полезную привычку.</p>
+        
+        <!-- Видео для SEO (увеличивает время на сайте) -->
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Как эффективно планировать день"
+                    frameborder="0"
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</section>
+    
+</main>
+
+<footer class="footer">
+    <p>© 2026 Планировщик задач созданный в ходе производственной практики студентами группы Веб-51</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
